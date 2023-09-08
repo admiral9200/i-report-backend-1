@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LogoDark from '../../images/logo/logo-dark.svg';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { signIn } from '../../redux/actions/auth';
 
@@ -9,6 +9,14 @@ const SignIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const destroyToken = async () => {
+      await localStorage.removeItem("token");
+    }
+
+    destroyToken();
+  }, [])
 
   return (
     <>

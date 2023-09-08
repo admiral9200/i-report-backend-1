@@ -1,8 +1,191 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import Breadcrumb from '../components/Breadcrumb';
 import CoverOne from '../images/cover/cover-01.png';
 import userSix from '../images/user/user-06.png';
 
+import { addProfile } from "../redux/actions/profile";
+
 const Profile = () => {
+  const { name, role, id } = useSelector(state => state.auth.currentUser);
+  const [curName, setCurName] = useState<string>(name);
+  const [curRole, setCurRole] = useState<string>(role);
+  const [curId, setCurId] = useState<string>(id);
+  const [isProfileUpdated, setIsProfileUpdated] = useState<boolean>(false);
+
+  // for profile
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [timezone, setTimezone] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [currency, setCurrency] = useState<string>("");
+  const [image, setImage] = useState<any>(null);
+
+  const dispatch = useDispatch();
+
+  const formData = new FormData();
+
+  const confirmSubmit = (params: any) => {
+    
+    formData.append("name", params.name);
+    formData.append("country", params.country);
+    formData.append("timezone", params.timezone);
+    formData.append("phoneNumber", params.phoneNumber);
+    formData.append("currency", params.currency);
+    formData.append("id", params.id);
+
+    dispatch(addProfile(formData));
+
+    formData.delete("name");
+    formData.delete('country');
+    formData.delete("timezone");
+    formData.delete("phoneNumber");
+    formData.delete("currency");
+    formData.delete("id");
+  }
+
+  const createProfile = () => {
+    return (
+      <form>
+        <div className="space-y-12">
+          <div className="border-b border-gray-900/10 pb-12">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              <div className="sm:col-span-3">
+                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">First name</label>
+                <div className="mt-2">
+                  <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={firstName}
+                         onChange={e => {setFirstName(e.target.value)}}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+                <div className="mt-2">
+                  <input type="text" name="last-name" id="last-name" autoComplete="family-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={lastName}
+                         onChange={e => {setLastName(e.target.value)}}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Country</label>
+                <div className="mt-2">
+                  <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={country}
+                         onChange={e => {setCountry(e.target.value)}}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">Timezone</label>
+                <div className="mt-2">
+                  <input type="text" name="last-name" id="last-name" autoComplete="family-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={timezone}
+                         onChange={e => setTimezone(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">Phone Number</label>
+                <div className="mt-2">
+                  <input type="text" name="first-name" id="first-name" autoComplete="given-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={phoneNumber}
+                         onChange={e => setPhoneNumber(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">Currency</label>
+                <div className="mt-2">
+                  <input type="text" name="last-name" id="last-name" autoComplete="family-name" 
+                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
+                         value={currency}
+                         onChange={e => setCurrency(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="col-span-full">
+                <label htmlFor="cover-photo" className="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
+                <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                  <div className="text-center">
+                    <svg className="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path fillRule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clipRule="evenodd" />
+                    </svg>
+                    <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                      <label htmlFor="file-upload" className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+                        <span>Upload a file</span>
+                        <input 
+                          id="file-upload" 
+                          name="file-upload" 
+                          type="file" 
+                          className="sr-only" 
+                          onChange={e => { formData.append("file", e.target.files[0]) }}
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+          <button type="button" className="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+          <button
+            onClick={(e) => {e.preventDefault(); 
+                            confirmSubmit({ name: firstName + " " + lastName, country, timezone, phoneNumber, currency, id, image })}}
+            className='rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    )
+  }
+
+  const renderProfileInfo = () => {
+    return (
+      <div className="mx-auto max-w-180">
+        <h4 className="font-semibold text-black dark:text-white">
+          About Me
+        </h4>
+        <p className="mt-4.5">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          Pellentesque posuere fermentum urna, eu condimentum mauris
+          tempus ut. Donec fermentum blandit aliquet. Etiam dictum dapibus
+          ultricies. Sed vel aliquet libero. Nunc a augue fermentum,
+          pharetra ligula sed, aliquam lacus.
+        </p>
+      </div>
+    )
+  }
+
+  const switchProfile = () => {
+    if (isProfileUpdated) {
+      return renderProfileInfo();
+    } else {
+      return createProfile();
+    }
+  }
+
+
   return (
     <>
       <Breadcrumb pageName="Profile" />
@@ -85,11 +268,15 @@ const Profile = () => {
               </label>
             </div>
           </div>
+          {/* update button */}
+          <div className='absolute'>
+            <button className='border rounded-lg p-2'>Update</button>
+          </div>
           <div className="mt-4">
             <h3 className="mb-1.5 text-2xl font-semibold text-black dark:text-white">
-              Danish Heilium
+              {curName}
             </h3>
-            <p className="font-medium">Ui/Ux Designer</p>
+            <p className="font-medium">{curRole}</p>
             <div className="mx-auto mt-4.5 mb-5.5 grid max-w-94 grid-cols-3 rounded-md border border-stroke py-2.5 shadow-1 dark:border-strokedark dark:bg-[#37404F]">
               <div className="flex flex-col items-center justify-center gap-1 border-r border-stroke px-4 dark:border-strokedark xsm:flex-row">
                 <span className="font-semibold text-black dark:text-white">
@@ -111,18 +298,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="mx-auto max-w-180">
-              <h4 className="font-semibold text-black dark:text-white">
-                About Me
-              </h4>
-              <p className="mt-4.5">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque posuere fermentum urna, eu condimentum mauris
-                tempus ut. Donec fermentum blandit aliquet. Etiam dictum dapibus
-                ultricies. Sed vel aliquet libero. Nunc a augue fermentum,
-                pharetra ligula sed, aliquam lacus.
-              </p>
-            </div>
+            {switchProfile()}
 
             <div className="mt-6.5">
               <h4 className="mb-3.5 font-medium text-black dark:text-white">

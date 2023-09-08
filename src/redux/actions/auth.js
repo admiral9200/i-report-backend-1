@@ -19,6 +19,9 @@ export const signIn = createAsyncThunk(
         try {
             const res = await axios.post("http://localhost:9200/auth/login", params);
             console.log(res.data)
+            if(res.status == 200) {
+                await localStorage.setItem("token", res.data.token);
+            }
             return res.data;
         } catch (err) {
             throw err;
@@ -29,6 +32,21 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk(
     'auth/signOut',
     async () => {
+        await localStorage.removeItem("token");
         return true;
+    }
+)
+
+export const setLoggedIn = createAsyncThunk(
+    'auth/setLoggedIn',
+    async () => {
+        return true;
+    }
+)
+
+export const setCurrentUser = createAsyncThunk(
+    'auth/setCurrentUser',
+    async (params) => {
+        return params;
     }
 )
