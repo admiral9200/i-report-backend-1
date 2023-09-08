@@ -19,7 +19,7 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const loggedIn = useSelector((state: any) => state.auth.loggedIn);
   const id = useSelector((state: any) => state.auth.currentUser.id);
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -27,7 +27,7 @@ const App = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if(id) {
+    if (id) {
       dispatch(getProfile(id));
     }
   }, [id])
@@ -35,6 +35,15 @@ const App = () => {
   useEffect(() => {
     dispatch(setCurrentRoute(location.pathname));
   }, [location])
+
+  useEffect(() => {
+    if(loggedIn) {
+      console.log("hello")
+      navigate("/");
+    } else {
+      navigate("/auth/signin");
+    }
+  }, [loggedIn])
 
   useEffect(() => {
     const checkUserData = async () => {
@@ -48,7 +57,7 @@ const App = () => {
             dispatch(signOut());
           } else {
             console.log("decodedToken: ", decodedToken);
-            if(decodedToken) {
+            if (decodedToken) {
               dispatch(setCurrentUser(decodedToken));
               dispatch(setLoggedIn());
             }
@@ -60,7 +69,7 @@ const App = () => {
     }
 
     checkUserData();
-  }, [])
+  }, [loggedIn])
 
   const renderPage = () => {
     if (loggedIn) {

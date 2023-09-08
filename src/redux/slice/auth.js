@@ -14,13 +14,14 @@ export const authSlice = createSlice({
             .addCase(signUp.fulfilled, (state) => {
                 state.registered = true;
             })
-            .addCase(signIn.fulfilled, state => {
+            .addCase(signIn.fulfilled, (state, action) => {
                 state.loggedIn = true;
                 state.registered = false;
             })
             .addCase(signOut.fulfilled, state => {
                 state.loggedIn = false;
                 state.registered = false;
+                state.currentUser = {};
             })
             .addCase(setLoggedIn.fulfilled, state => {
                 state.loggedIn = true;

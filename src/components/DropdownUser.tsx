@@ -13,8 +13,8 @@ const DropdownUser = () => {
 
   const [ username, setUsername ] = useState<string>("");
   const [ userRole, setUserRole ] = useState<string>("");
-  const name = useSelector((state: any) => state.profile.profile.profile.name);
-  const role = useSelector((state: any) => state.auth.currentUser.role);
+  const name = useSelector((state: any) => state.profile.profile?.profile?.name);
+  const role = useSelector((state: any) => state.auth.currentUser?.role);
 
   useEffect(() => {
     setUsername(name);

@@ -59,7 +59,7 @@ You'll need to install Node.js >=v14.16+ (Recommended Version) (NPM comes along 
 
 - Then run : <code>npm run dev</code>
 
-Now, in the browser go to <code>localhost:5173</code>
+Now, in the browser go to <code>192.168.109.163:5173</code>
 
 **For Production Build**
 Run : <code>npm run build</code>

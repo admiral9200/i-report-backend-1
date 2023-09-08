@@ -16,10 +16,6 @@ const Dashboard = () => {
 
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [curRoute, setCurRoute] = useState<any>(currentRoute);
-
-  useEffect(() => {
-    alert(currentRoute);
-  },[currentRoute])
   
 
   const switchComponent = (current: string) => {
