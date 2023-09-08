@@ -16,16 +16,13 @@ const Dashboard = () => {
 
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [curRoute, setCurRoute] = useState<any>(currentRoute);
-  
 
   const switchComponent = (current: string) => {
-    console.log("current: ", current);
     if(current == "/") {
       return (
         <>
           <PostCreate />
           <PostList />
-          {/* <Profile /> */}
         </>
       )
     }
@@ -53,10 +50,10 @@ const Dashboard = () => {
           <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
-            <ImgCard />
+            <ImgCard eventProps='Comedy'/>
+            <ImgCard eventProps='Entertainment'/>
+            <ImgCard eventProps='Sport'/>
+            <ImgCard eventProps='LifeStyle'/>
           </div>
 
           <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
