@@ -5,7 +5,7 @@ export const signUp = createAsyncThunk(
     'auth/signUp',
     async (params) => {
         try {
-            const res = await axios.post("https://1social-media-i-rport-backend-k83rmc4lr-admiral9200.vercel.app/auth/register", { ...params, role: "user" });
+            const res = await axios.post("http://localhost:9200/auth/register", { ...params, role: "user" });
             return res.data;
         } catch(err) {
             throw err;
@@ -17,7 +17,7 @@ export const signIn = createAsyncThunk(
     'auth/signIn',
     async (params) => {
         try {
-            const res = await axios.post("https://1social-media-i-rport-backend-k83rmc4lr-admiral9200.vercel.app/auth/login", params);
+            const res = await axios.post("http://localhost:9200/auth/login", params);
             console.log(res.data)
             if(res.status == 200) {
                 await localStorage.setItem("token", res.data.token);

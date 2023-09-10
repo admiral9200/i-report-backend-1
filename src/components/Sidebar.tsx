@@ -111,18 +111,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 {(handleClick, open) => {
                   return (
                     <React.Fragment>
-                      <NavLink
-                        to="#"
-                        className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${(pathname === '/' ||
-                            pathname.includes('dashboard')) &&
-                          'bg-graydark dark:bg-meta-4'
-                          }`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          sidebarExpanded
-                            ? handleClick()
-                            : setSidebarExpanded(true);
-                        }}
+                      <button
+                        className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 '
+                        onClick={
+                          e => {
+                            e.preventDefault();
+                            dispatch(setCurrentRoute('/'))
+                          }
+                        }
                       >
                         <svg
                           className="fill-current"
@@ -166,7 +162,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                             fill=""
                           />
                         </svg>
-                      </NavLink>
+                      </button>
 
                     </React.Fragment>
                   );
@@ -176,12 +172,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
 
               {/* <!-- Menu Item Live Studios --> */}
               <li>
-                <NavLink
-                  to="/calendar"
-                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${pathname.includes('calendar') &&
-                    'bg-graydark dark:bg-meta-4'
-                    }`}
-                >
+                <button
+                  className='group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4'
+                  onClick={
+                    e => {
+                      e.preventDefault();
+                      dispatch(setCurrentRoute('/live-studios'))
+                    }}
+                  >
                   <svg
                     className="fill-current"
                     width="18"
@@ -196,7 +194,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     />
                   </svg>
                   Live Studios
-                </NavLink>
+                </button>
               </li>
               {/* <!-- Menu Item Live Studios --> */}
 
@@ -276,26 +274,30 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                       >
                         <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                           <li>
-                            <NavLink
-                              to="/forms/form-elements"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
+                            <button
+                              className='group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white'
+                              onClick={
+                                e => {
+                                  e.preventDefault();
+                                  dispatch(setCurrentRoute('/election-report-submission'))
+                                }
                               }
                             >
                               Election Report Submission
-                            </NavLink>
+                            </button>
                           </li>
                           <li>
-                            <NavLink
-                              to="/forms/form-layout"
-                              className={({ isActive }) =>
-                                'group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ' +
-                                (isActive && '!text-white')
+                            <button
+                              className='group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white'
+                              onClick={
+                                e => {
+                                  e.preventDefault();
+                                  dispatch(setCurrentRoute('/election-result'))
+                                }
                               }
                             >
                               Election Result
-                            </NavLink>
+                            </button>
                           </li>
                         </ul>
                       </div>
