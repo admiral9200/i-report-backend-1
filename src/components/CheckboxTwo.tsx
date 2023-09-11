@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
-const CheckboxTwo = () => {
+interface TextProp {
+  text: string
+}
+
+const CheckboxTwo = ({ text }: TextProp) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
   return (
-    <div>
+    <div className='py-3'>
       <label
         htmlFor="checkboxLabelTwo"
         className="flex cursor-pointer select-none items-center"
@@ -19,9 +23,8 @@ const CheckboxTwo = () => {
             }}
           />
           <div
-            className={`mr-4 flex h-5 w-5 items-center justify-center rounded border ${
-              isChecked && 'border-primary bg-gray dark:bg-transparent'
-            }`}
+            className={`mr-4 flex h-5 w-5 items-center justify-center rounded border ${isChecked && 'border-primary bg-gray dark:bg-transparent'
+              }`}
           >
             <span className={`opacity-0 ${isChecked && '!opacity-100'}`}>
               <svg
@@ -41,7 +44,7 @@ const CheckboxTwo = () => {
             </span>
           </div>
         </div>
-        Checkbox Text
+        {text}
       </label>
     </div>
   );

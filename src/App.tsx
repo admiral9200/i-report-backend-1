@@ -8,16 +8,18 @@ import Dashboard from './pages/Dashboard/index.js';
 import SignIn from './pages/Authentication/SignIn';
 import SignUp from './pages/Authentication/SignUp';
 import Loader from './common/Loader';
-import routes from './routes';
-import { signOut, setLoggedIn, setCurrentUser } from "./redux/actions/auth";
+
+import { signOut, setLoggedIn, setCurrentUser, getCurrentUserRole } from "./redux/actions/auth";
 import { setCurrentRoute } from "./redux/actions/route";
 import { getProfile } from "./redux/actions/profile";
+import AdminDashboard from './pages/Admin/index.js';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
 const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const loggedIn = useSelector((state: any) => state.auth.loggedIn);
+  const role = useSelector((state: any) => state.auth.currentUser.role);
   const id = useSelector((state: any) => state.auth.currentUser.id);
 
   const navigate = useNavigate();
@@ -38,12 +40,15 @@ const App = () => {
 
   useEffect(() => {
     if(loggedIn) {
-      console.log("hello")
-      navigate("/");
+      if(role == "admin") {
+        navigate("/admin/")
+      } else {
+        navigate("/");
+      }
     } else {
       navigate("/auth/signin");
     }
-  }, [loggedIn])
+  }, [loggedIn, role])
 
   useEffect(() => {
     const checkUserData = async () => {
@@ -56,7 +61,6 @@ const App = () => {
             await localStorage.removeItem("token");
             dispatch(signOut());
           } else {
-            console.log("decodedToken: ", decodedToken);
             if (decodedToken) {
               dispatch(setCurrentUser(decodedToken));
               dispatch(setLoggedIn());
@@ -81,6 +85,7 @@ const App = () => {
           <Routes>
             <Route element={<DefaultLayout />} />
             <Route index element={<Dashboard />} />
+            <Route path='/admin/' element={<AdminDashboard />} />
           </Routes>
         </>
       );

@@ -6,7 +6,7 @@ export const addProfile = createAsyncThunk(
     async (params) => {
         try {
             console.log("save profile: ", params)
-            const res = await axios.post("http://localhost:9200/profile/create", params);
+            const res = await axios.post("https://social-media-i-rport-backend-gjf3.vercel.app/profile/create", params);
             return res.data;
         } catch(err) {
             throw err;
@@ -19,7 +19,7 @@ export const getProfile = createAsyncThunk(
     async (params) => {
         console.log("get profile: ", params);
         try {
-            const res = await axios.post("http://localhost:9200/profile/get", params);
+            const res = await axios.post("https://social-media-i-rport-backend-gjf3.vercel.app/profile/get", params);
             return res.data;
         } catch(err) {
 

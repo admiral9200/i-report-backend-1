@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { setLoggedIn, signIn, signOut, signUp, setCurrentUser } from "../actions/auth";
+import { setLoggedIn, signIn, signOut, signUp, setCurrentUser, getCurrentUserRole } from "../actions/auth";
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -28,6 +28,9 @@ export const authSlice = createSlice({
             })
             .addCase(setCurrentUser.fulfilled, (state, action) => {
                 state.currentUser = action.payload;
+            })
+            .addCase(getCurrentUserRole.fulfilled, state => {
+                return state.currentUser.role
             })
     }
 })

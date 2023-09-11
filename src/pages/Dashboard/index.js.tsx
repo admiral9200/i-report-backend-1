@@ -5,7 +5,7 @@ import ImgCard from '../../components/dashboard/ImgCard.tsx';
 import NotificationList from '../../components/dashboard/NotificationList.tsx';
 import PostCreate from '../../components/dashboard/PostCreate.tsx';
 import PostList from '../../components/dashboard/PostList.tsx';
-// import Header from '../../components/Header.tsx';
+import Header from '../../components/Header.tsx';
 import Sidebar from '../../components/Sidebar.tsx';
 import Profile from '../Profile.tsx';
 import ElectionReportSubmission from '../../components/election/ElectionReportSubmission.tsx';
@@ -76,7 +76,7 @@ const Dashboard = () => {
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-          {/* <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {
             switchComponent(curRoute)
