@@ -5,7 +5,7 @@ const signUp = createAsyncThunk(
     'auth/signUp',
     async (params) => {
         try {
-            const res = await axios.post("http://localhost:9200/auth/register", { ...params, role: "user" }, {
+            const res = await axios.post("https://social-media-i-rport-backend-gjf3-admiral9200.vercel.app:9200/auth/register", { ...params, role: "user" }, {
                 headers: {
                     'Access-Control-Allow-Origin': '*', // Allow requests from any origin
                     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // Specify allowed HTTP methods
@@ -23,7 +23,7 @@ const signIn = createAsyncThunk(
     'auth/signIn',
     async (params) => {
         try {
-            const res = await axios.post("http://localhost:9200/auth/login", params);
+            const res = await axios.post("https://social-media-i-rport-backend-gjf3-admiral9200.vercel.app:9200/auth/login", params);
             console.log(res.data)
             if(res.status == 200) {
                 await localStorage.setItem("token", res.data.token);
