@@ -5,13 +5,7 @@ const signUp = createAsyncThunk(
     'auth/signUp',
     async (params) => {
         try {
-            const res = await axios.post("https://social-media-i-rport-backend-gjf3-admiral9200.vercel.app:9200/auth/register", { ...params, role: "user" }, {
-                headers: {
-                    'Access-Control-Allow-Origin': '*', // Allow requests from any origin
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE', // Specify allowed HTTP methods
-                    'Access-Control-Allow-Headers': 'Content-Type, Authorization', // Specify allowed headers
-                }
-            });
+            const res = await axios.post("https://social-media-i-rport-backend-gjf3-admiral9200.vercel.app:9200/auth/register", { ...params, role: "user" });
             return res.data;
         } catch(err) {
             throw err;
