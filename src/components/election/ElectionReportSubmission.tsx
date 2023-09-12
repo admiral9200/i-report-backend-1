@@ -1,7 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux";
 import Modal from 'react-modal';
+
 import WordIcon from "../../images/icon/world-wide-web-svgrepo-com.svg";
 import CloseIcon from "../../images/icon/close-circle-svgrepo-com.svg";
+
+import { getStates, getGovernments, getWards, getPolls } from "../../redux/actions/election";
 
 const customStyles = {
     content: {
@@ -23,6 +27,46 @@ const ElectionReportSubmission = () => {
     const [electionState, setElectionState] = useState<string>("switch");
     const [formState, setFormState] = useState<boolean>(false);
     const [submissionModal, setSubmissionModal] = useState<boolean>(false);
+
+    const [localCountries, setLocalCountries] = useState<any>([]);
+    const [localStates, setLocalStates] = useState<any>([]);
+    const [localGovernments, setLocalGovernments] = useState<any>([]);
+    const [localWards, setLocalWards] = useState<any>([]);
+    const [localPolls, setLocalPolls] = useState<any>([]);
+    
+    const [country, setCountry] = useState<string>("");
+    const [state, setState] = useState<string>("");
+    const [government, setGovernment] = useState<string>("");
+    const [ward, setWard] = useState<string>("");
+    const [poll, setPoll] = useState<string>("");
+
+    const countries = useSelector((state: any) => state.election.countries?.countries);
+    const states = useSelector((state: any) => state.election.states?.states);
+    const governments = useSelector((state: any) => state.election.governments?.governments);
+    const wards = useSelector((state: any) => state.election.wards?.wards);
+    const polls = useSelector((state: any) => state.election.polls?.polls);
+
+    useEffect(() => {
+        setLocalCountries(countries);
+    }, [countries])
+
+    useEffect(() => {
+        setLocalStates(states);
+    }, [states])
+
+    useEffect(() => {
+        setLocalGovernments(governments);
+    }, [governments])
+
+    useEffect(() => {
+        setLocalWards(wards);
+    }, [wards])
+
+    useEffect(() => {
+        setLocalPolls(polls);
+    }, [polls])
+
+    const dispatch = useDispatch();
 
     const openModal = () => {
         setIsOpen(true);
@@ -115,44 +159,48 @@ const ElectionReportSubmission = () => {
                 <div className="p-2">
                     <div>
                         <table className="items-center">
-                            <tr>
-                                <th className="p-4 mx-4">Name</th>
-                                <th className="p-4 mx-4">Logo</th>
-                                <th className="p-4 mx-4">Vote</th>
-                            </tr>
-                            <tr>
-                                <td className="p-4 mx-4">
-                                    Party X
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <input type="number" className="px-2 text-[12px]" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="p-4 mx-4">
-                                    Party X
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <input type="number" className="px-2 text-[12px]" />
-                                </td>
-                            </tr>
-                            <tr>
-                                <td className="p-4 mx-4">
-                                    Party X
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                </td>
-                                <td className="p-4 mx-4">
-                                    <input type="number" className="px-2 text-[12px]" />
-                                </td>
-                            </tr>
+                            <thead>
+                                <tr>
+                                    <th className="p-4 mx-4">Name</th>
+                                    <th className="p-4 mx-4">Logo</th>
+                                    <th className="p-4 mx-4">Vote</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td className="p-4 mx-4">
+                                        Party X
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <input type="number" className="px-2 text-[12px]" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="p-4 mx-4">
+                                        Party X
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <input type="number" className="px-2 text-[12px]" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="p-4 mx-4">
+                                        Party X
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
+                                    </td>
+                                    <td className="p-4 mx-4">
+                                        <input type="number" className="px-2 text-[12px]" />
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div className="flex justify-between items-center">
@@ -184,7 +232,7 @@ const ElectionReportSubmission = () => {
                             Incident Type
                         </div>
                         <div className="flex flex-col">
-                            <button 
+                            <button
                                 className="border-1 my-2 rounded-full px-2 bg-[#e0e6ec] hover:bg-[#bad6f2]"
                                 onClick={() => { setFormState(true); setIsOpen(false) }}
                             >
@@ -209,13 +257,12 @@ const ElectionReportSubmission = () => {
                             <p className="my-4 text-[18px] font-bold">Country</p>
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]">
-                                    <option>
-                                        Nigeria
-                                    </option>
-                                    <option>
-                                        Bangladesh
-                                    </option>
+                                <select
+                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                    onChange={e => {e.preventDefault(); dispatch(getStates(e.target.value)); setCountry(e.target.value)}}
+                                >
+                                    <option>Select country</option>
+                                    <option>Nigeria</option>
                                 </select>
                             </div>
                         </div>
@@ -223,13 +270,20 @@ const ElectionReportSubmission = () => {
                             <p className="my-4 text-[18px] font-bold">State</p>
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]">
-                                    <option>
-                                        Nigeria
-                                    </option>
-                                    <option>
-                                        Bangladesh
-                                    </option>
+                                <select
+                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                    onChange={e => {e.preventDefault(); dispatch(getGovernments({country, state: e.target.value})); setState(e.target.value)}}
+                                >
+                                    <option></option>
+                                    {
+                                        localStates && localStates.map((state: string) => {
+                                            return (
+                                                <option key={state}>
+                                                    {state}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -237,13 +291,20 @@ const ElectionReportSubmission = () => {
                             <p className="my-4 text-[18px] font-bold">Local Government</p>
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]">
-                                    <option>
-                                        Nigeria
-                                    </option>
-                                    <option>
-                                        Bangladesh
-                                    </option>
+                                <select 
+                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                    onChange={e => {e.preventDefault(); dispatch(getWards({country, state, government: e.target.value})); setGovernment(e.target.value)}}
+                                >
+                                    <option>Select a local government</option>
+                                    {
+                                        localGovernments && localGovernments.map((government: string) => {
+                                            return (
+                                                <option key={government}>
+                                                    {government}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -251,13 +312,20 @@ const ElectionReportSubmission = () => {
                             <p className="my-4 text-[18px] font-bold">Political Ward</p>
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]">
-                                    <option>
-                                        Nigeria
-                                    </option>
-                                    <option>
-                                        Bangladesh
-                                    </option>
+                                <select 
+                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                    onChange={e => {e.preventDefault(); dispatch(getPolls({country, state, government, ward: e.target.value})); setWard(e.target.value)}}
+                                >
+                                    <option>Select a political ward</option>
+                                    {
+                                        localWards && localWards.map((ward: string) => {
+                                            return (
+                                                <option key={ward}>
+                                                    {ward}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
@@ -265,13 +333,20 @@ const ElectionReportSubmission = () => {
                             <p className="my-4 text-[18px] font-bold">Polling</p>
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]">
-                                    <option>
-                                        Nigeria
-                                    </option>
-                                    <option>
-                                        Bangladesh
-                                    </option>
+                                <select 
+                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                    onChange={e => {e.preventDefault(); setPoll(e.target.value)}}
+                                >
+                                    <option>Select a poll</option>
+                                    {
+                                        localPolls && localPolls.map((poll: string) => {
+                                            return (
+                                                <option key={poll}>
+                                                    {poll}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
                             </div>
                         </div>
