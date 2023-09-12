@@ -13,11 +13,10 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
 
-  const registered = useSelector(state => state.auth.registered);
+  const registered = useSelector((state: any) => state.auth.registered);
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(registered);
     if(registered) {
       navigate("/auth/signin");
     }

@@ -6,6 +6,7 @@ import WordIcon from "../../images/icon/world-wide-web-svgrepo-com.svg";
 import CloseIcon from "../../images/icon/close-circle-svgrepo-com.svg";
 
 import { getStates, getGovernments, getWards, getPolls } from "../../redux/actions/election";
+import { saveVote } from "../../redux/actions/vote";
 
 const customStyles = {
     content: {
@@ -23,6 +24,8 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const ElectionReportSubmission = () => {
+    const dispatch = useDispatch();
+    
     const [modalIsOpen, setIsOpen] = useState<boolean>(false);
     const [electionState, setElectionState] = useState<string>("switch");
     const [formState, setFormState] = useState<boolean>(false);
@@ -33,6 +36,7 @@ const ElectionReportSubmission = () => {
     const [localGovernments, setLocalGovernments] = useState<any>([]);
     const [localWards, setLocalWards] = useState<any>([]);
     const [localPolls, setLocalPolls] = useState<any>([]);
+    const [localParties, setLocalParties] = useState<any>([]);
     
     const [country, setCountry] = useState<string>("");
     const [state, setState] = useState<string>("");
@@ -45,6 +49,14 @@ const ElectionReportSubmission = () => {
     const governments = useSelector((state: any) => state.election.governments?.governments);
     const wards = useSelector((state: any) => state.election.wards?.wards);
     const polls = useSelector((state: any) => state.election.polls?.polls);
+
+    const parties = useSelector((state: any) => state.party.parties?.parties);
+    const userId = useSelector((state: any) => state.auth.currentUser.id);
+
+    useEffect(() => {
+        setLocalParties(parties);
+        console.log("parties: ", localParties)
+    }, [])
 
     useEffect(() => {
         setLocalCountries(countries);
@@ -66,8 +78,6 @@ const ElectionReportSubmission = () => {
         setLocalPolls(polls);
     }, [polls])
 
-    const dispatch = useDispatch();
-
     const openModal = () => {
         setIsOpen(true);
     }
@@ -75,6 +85,22 @@ const ElectionReportSubmission = () => {
     const closeModal = () => {
         setIsOpen(false);
         setSubmissionModal(false);
+    }
+
+    const handleChange = (e: any, index: number) => {
+        const updatedParties = localParties.map((party: any, i: number) => {
+            if (i === index) {
+              return { ...party, value: e.target.value };
+            }
+            return party;
+          });
+          setLocalParties(updatedParties);
+          console.log(localParties)
+    }
+
+    const uploadVote = () => {
+        console.log(userId)
+        
     }
 
     const switchComponent = () => {
@@ -167,39 +193,29 @@ const ElectionReportSubmission = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className="p-4 mx-4">
-                                        Party X
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <input type="number" className="px-2 text-[12px]" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-4 mx-4">
-                                        Party X
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <input type="number" className="px-2 text-[12px]" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className="p-4 mx-4">
-                                        Party X
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
-                                    </td>
-                                    <td className="p-4 mx-4">
-                                        <input type="number" className="px-2 text-[12px]" />
-                                    </td>
-                                </tr>
+                                {
+                                    localParties &&
+                                    localParties.map((party: any, index: number) => {
+                                        return (
+                                            <tr key={party._id}>
+                                                <td className="p-4 mx-4">
+                                                    { party.name }
+                                                </td>
+                                                <td className="p-4 mx-4">
+                                                    <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
+                                                </td>
+                                                <td className="p-4 mx-4">
+                                                    <input 
+                                                        type="number" 
+                                                        className="px-2 text-[12px]"
+                                                        value={party.value || ''}
+                                                        onChange={e => handleChange(e, index)}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -274,7 +290,7 @@ const ElectionReportSubmission = () => {
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
                                     onChange={e => {e.preventDefault(); dispatch(getGovernments({country, state: e.target.value})); setState(e.target.value)}}
                                 >
-                                    <option></option>
+                                    <option>Select a state</option>
                                     {
                                         localStates && localStates.map((state: string) => {
                                             return (
@@ -365,6 +381,7 @@ const ElectionReportSubmission = () => {
                         <div className="col-span-2">
                             <button
                                 className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold"
+                                onClick={e => { e.preventDefault(); dispatch(saveVote({ country, state, government, ward, poll, localParties, userId })); }}
                             >
                                 Upload
                             </button>

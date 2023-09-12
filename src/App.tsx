@@ -12,6 +12,8 @@ import Loader from './common/Loader';
 import { signOut, setLoggedIn, setCurrentUser, getCurrentUserRole } from "./redux/actions/auth";
 import { setCurrentRoute } from "./redux/actions/route";
 import { getProfile } from "./redux/actions/profile";
+import { getParties } from "./redux/actions/party";
+
 import AdminDashboard from './pages/Admin/index.js';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
@@ -64,6 +66,7 @@ const App = () => {
             if (decodedToken) {
               dispatch(setCurrentUser(decodedToken));
               dispatch(setLoggedIn());
+              dispatch(getParties())
             }
           }
         }

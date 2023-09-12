@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const signUp = createAsyncThunk(
+const signUp = createAsyncThunk(
     'auth/signUp',
     async (params) => {
         try {
@@ -19,7 +19,7 @@ export const signUp = createAsyncThunk(
     }
 )
 
-export const signIn = createAsyncThunk(
+const signIn = createAsyncThunk(
     'auth/signIn',
     async (params) => {
         try {
@@ -35,7 +35,7 @@ export const signIn = createAsyncThunk(
     }
 )
 
-export const signOut = createAsyncThunk(
+const signOut = createAsyncThunk(
     'auth/signOut',
     async () => {
         await localStorage.removeItem("token");
@@ -43,23 +43,25 @@ export const signOut = createAsyncThunk(
     }
 )
 
-export const setLoggedIn = createAsyncThunk(
+const setLoggedIn = createAsyncThunk(
     'auth/setLoggedIn',
     async () => {
         return true;
     }
 )
 
-export const setCurrentUser = createAsyncThunk(
+const setCurrentUser = createAsyncThunk(
     'auth/setCurrentUser',
     async (params) => {
         return params;
     }
 )
 
-export const getCurrentUserRole = createAsyncThunk(
+const getCurrentUserRole = createAsyncThunk(
     'auth/getCurrentUserRole',
     async () => {
         return {};
     }
 )
+
+export { signUp, signIn, signOut, setLoggedIn, setCurrentUser, getCurrentUserRole };

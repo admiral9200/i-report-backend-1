@@ -1,11 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import WorldIcon from "../../images/icon/world-wide-web-svgrepo-com.svg";
 import AfricaImg from "../../images/country/africa-map-svgrepo-com.svg";
 import ViewImg from "../../images/icon/view-hide-svgrepo-com.svg";
 
+import { getTotalVotes, getVotePercents, getVotersNumber } from '../../redux/actions/vote';
+import { useDispatch, useSelector } from "react-redux";
+
 const Results = () => {
+    const dispatch = useDispatch();
+
     const [openProofForm, setOpenProofForm] = useState<boolean>(false);
+
+    const [localParties, setLocalParties] = useState<any>([]);
+    const [localTotalVotes, setLocalTotalVotes] = useState<number>(0);
+    const [localVotePercent, setLocalVotePercent] = useState<any>([]);
+    const [localVoters, setLocalVoters] = useState<any>([]);
+
+    const parties = useSelector((state: any) => state.party.parties?.parties);
+    const totalVotes = useSelector((state: any) => state.vote.totalVotes.sum);
+    const votePercents = useSelector((state: any) => state.vote.votePercents.percents);
+    const votersNumber = useSelector((state: any) => state.vote.votersNumber.votersNumber);
+
+    useEffect(() => {
+        dispatch(getTotalVotes());
+        dispatch(getVotePercents());
+        dispatch(getVotersNumber());
+    }, [])
+
+    useEffect(() => {
+        setLocalParties(parties);
+    }, [parties])
+
+    useEffect(() => {
+        setLocalTotalVotes(totalVotes);
+    }, [totalVotes])
+
+    useEffect(() => {
+        setLocalVotePercent(votePercents);
+        console.log("local vote percents: ", localVotePercent)
+    }, [votePercents])
+
+    useEffect(() => {
+        setLocalVoters(votersNumber);
+    }, [votersNumber])
 
     const switchComponent = () => {
         if (openProofForm) {
@@ -321,29 +359,29 @@ const Results = () => {
                     {/* rate */}
                     <div className="mt-8">
                         <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4">Party X</p>
-                            <div className="col-span-10 bg-[#1877f2] w-[100%]"></div>
-                            <p className="col-span-1 py-2 ml-6">100%</p>
+                            <p className="col-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4">Party A</p>
+                            <div className={`col-span-10 bg-[#1877f2] w-[${localVotePercent[0] || 10}%]`}></div>
+                            <p className="col-span-1 py-2 ml-6">{localVotePercent[0]}%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center">Party X</p>
+                            <p className="col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center">Party B</p>
                             <div className="col-span-10 bg-[#f3f70f] w-[80%]"></div>
-                            <p className="col-span-1 py-2 ml-6">100%</p>
+                            <p className="col-span-1 py-2 ml-6">{localVotePercent[1]}%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#6ef703] rounded-md py-2 mr-4 flex justify-center">Party X</p>
+                            <p className="col-span-1 bg-[#6ef703] rounded-md py-2 mr-4 flex justify-center">Party C</p>
                             <div className="col-span-10 bg-[#6ef703] w-[40%]"></div>
-                            <p className="col-span-1 py-2 ml-6">100%</p>
+                            <p className="col-span-1 py-2 ml-6">{localVotePercent[2]}%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#d24b4b] rounded-md py-2 mr-4 flex justify-center">Party X</p>
+                            <p className="col-span-1 bg-[#d24b4b] rounded-md py-2 mr-4 flex justify-center">Party D</p>
                             <div className="col-span-10 bg-[#d24b4b] w-[90%]"></div>
-                            <p className="col-span-1 py-2 ml-6">100%</p>
+                            <p className="col-span-1 py-2 ml-6">{localVotePercent[3]}%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#c2078e] rounded-md py-2 mr-4 flex justify-center">Party X</p>
+                            <p className="col-span-1 bg-[#c2078e] rounded-md py-2 mr-4 flex justify-center">Party E</p>
                             <div className="col-span-10 bg-[#c2078e] w-[70%]"></div>
-                            <p className="col-span-1 py-2 ml-6">100%</p>
+                            <p className="col-span-1 py-2 ml-6">{localVotePercent[4]}%</p>
                         </div>
                     </div>
                     {/* gps */}
@@ -381,51 +419,22 @@ const Results = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td className="p-4 mx-4 border-1 ">Election Party X</td>
-                                        <td className="p-4 mx-4 border-1  flex justify-center">
-                                            <img src={WorldIcon} alt="Logo" className="w-[20%]" />
-                                        </td>
-                                        <td className="p-4 mx-4 border-1 ">30520</td>
-                                        <td className="p-4 mx-4 border-1 ">37%</td>
-                                        <td className="p-4 mx-4 border-1 ">10250</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 mx-4 border-1 ">Election Party X</td>
-                                        <td className="p-4 mx-4 border-1  flex justify-center">
-                                            <img src={WorldIcon} alt="Logo" className="w-[20%]" />
-                                        </td>
-                                        <td className="p-4 mx-4 border-1 ">30520</td>
-                                        <td className="p-4 mx-4 border-1 ">37%</td>
-                                        <td className="p-4 mx-4 border-1 ">10250</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 mx-4 border-1 ">Election Party X</td>
-                                        <td className="p-4 mx-4 border-1  flex justify-center">
-                                            <img src={WorldIcon} alt="Logo" className="w-[20%]" />
-                                        </td>
-                                        <td className="p-4 mx-4 border-1 ">30520</td>
-                                        <td className="p-4 mx-4 border-1 ">37%</td>
-                                        <td className="p-4 mx-4 border-1 ">10250</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 mx-4 border-1 ">Election Party X</td>
-                                        <td className="p-4 mx-4 border-1  flex justify-center">
-                                            <img src={WorldIcon} alt="Logo" className="w-[20%]" />
-                                        </td>
-                                        <td className="p-4 mx-4 border-1 ">30520</td>
-                                        <td className="p-4 mx-4 border-1 ">37%</td>
-                                        <td className="p-4 mx-4 border-1 ">10250</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-4 mx-4 border-1 ">Election Party X</td>
-                                        <td className="p-4 mx-4 border-1  flex justify-center">
-                                            <img src={WorldIcon} alt="Logo" className="w-[20%]" />
-                                        </td>
-                                        <td className="p-4 mx-4 border-1 ">30520</td>
-                                        <td className="p-4 mx-4 border-1 ">37%</td>
-                                        <td className="p-4 mx-4 border-1 ">10250</td>
-                                    </tr>
+                                    {
+                                        localParties && 
+                                        localParties.map((party: any, index: number) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td className="p-4 mx-4 border-1 ">{party.name}</td>
+                                                    <td className="p-4 mx-4 border-1  flex justify-center">
+                                                        <img src={WorldIcon} alt="Logo" className="w-[20%]" />
+                                                    </td>
+                                                    <td className="p-4 mx-4 border-1 ">{ localTotalVotes }</td>
+                                                    <td className="p-4 mx-4 border-1 ">{ localVotePercent[index] }%</td>
+                                                    <td className="p-4 mx-4 border-1 ">{ localVoters }</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>
