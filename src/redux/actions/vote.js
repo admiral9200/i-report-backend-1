@@ -5,8 +5,7 @@ export const saveVote = createAsyncThunk(
     'vote/saveVote',
     async (params) => {
         try {
-            console.log("params: ", params)
-            const res = await axios.post("https://i-report-backend-admiral.onrender.com/vote/saveVote", { ...params });
+            const res = await axios.post("https://i-report-backend-admiral.onrender.com/vote/saveVote", params);
             return res.data;
         } catch(err) {
             throw err;

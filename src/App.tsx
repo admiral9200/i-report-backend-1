@@ -15,6 +15,7 @@ import { getProfile } from "./redux/actions/profile";
 import { getParties } from "./redux/actions/party";
 
 import AdminDashboard from './pages/Admin/index.js';
+import AgentDashboard from './pages/Agent/index.js';
 
 const DefaultLayout = lazy(() => import('./layout/DefaultLayout'));
 
@@ -41,9 +42,11 @@ const App = () => {
   }, [location])
 
   useEffect(() => {
-    if(loggedIn) {
-      if(role == "admin") {
+    if (loggedIn) {
+      if (role == "admin") {
         navigate("/admin/")
+      } else if (role == "agent") {
+        navigate("/agent/")
       } else {
         navigate("/");
       }
@@ -89,6 +92,7 @@ const App = () => {
             <Route element={<DefaultLayout />} />
             <Route index element={<Dashboard />} />
             <Route path='/admin/' element={<AdminDashboard />} />
+            <Route path='/agent/' element={<AgentDashboard />} />
           </Routes>
         </>
       );

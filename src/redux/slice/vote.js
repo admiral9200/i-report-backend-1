@@ -5,10 +5,10 @@ export const voteSlice = createSlice({
     name: 'route',
     initialState: {
         voted: false,
-        vote: [],
         totalVotes: 0,
         votePercents: [],
-        votersNumber: 0
+        votersNumber: 0,
+        votes: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -17,7 +17,7 @@ export const voteSlice = createSlice({
                 state.voted = action.payload;
             })
             .addCase(getVotes.fulfilled, (state, action) => {
-                state.vote = action.payload;
+                state.votes = action.payload;
             })
             .addCase(getTotalVotes.fulfilled, (state, action) => {
                 state.totalVotes = action.payload;

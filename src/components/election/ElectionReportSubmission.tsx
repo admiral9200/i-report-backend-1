@@ -25,6 +25,7 @@ Modal.setAppElement('#root');
 
 const ElectionReportSubmission = () => {
     const dispatch = useDispatch();
+    const [formData, setFormData] = useState(new FormData());
     
     const [modalIsOpen, setIsOpen] = useState<boolean>(false);
     const [electionState, setElectionState] = useState<string>("switch");
@@ -37,6 +38,9 @@ const ElectionReportSubmission = () => {
     const [localWards, setLocalWards] = useState<any>([]);
     const [localPolls, setLocalPolls] = useState<any>([]);
     const [localParties, setLocalParties] = useState<any>([]);
+    const [localUserId, setLocalUserId] = useState<string>("");
+
+    const [currentDate, setCurrentDate] = useState<any>(new Date());
     
     const [country, setCountry] = useState<string>("");
     const [state, setState] = useState<string>("");
@@ -52,11 +56,20 @@ const ElectionReportSubmission = () => {
 
     const parties = useSelector((state: any) => state.party.parties?.parties);
     const userId = useSelector((state: any) => state.auth.currentUser.id);
+    
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentDate(new Date());
+        }, 1000);
+    
+        return () => {
+          clearInterval(interval);
+        };
+      }, []);
 
     useEffect(() => {
         setLocalParties(parties);
-        console.log("parties: ", localParties)
-    }, [])
+    }, [parties])
 
     useEffect(() => {
         setLocalCountries(countries);
@@ -78,6 +91,20 @@ const ElectionReportSubmission = () => {
         setLocalPolls(polls);
     }, [polls])
 
+    useEffect(() => {
+        setLocalUserId(userId)
+    }, [userId])
+
+    const handleInputChange = (e: any) => {
+        if(e.target.name === 'file_upload') {
+            formData.set(e.target.name, e.target.files[0])
+        } else {
+            formData.set(e.target.name, e.target.value);
+        }
+        
+      };
+
+
     const openModal = () => {
         setIsOpen(true);
     }
@@ -98,9 +125,11 @@ const ElectionReportSubmission = () => {
           console.log(localParties)
     }
 
-    const uploadVote = () => {
-        console.log(userId)
-        
+    const submitVote = () => {
+        console.log(localParties)
+        formData.set("localParties", JSON.stringify(localParties));
+        formData.set("userId", localUserId);
+        dispatch(saveVote(formData));
     }
 
     const switchComponent = () => {
@@ -136,9 +165,8 @@ const ElectionReportSubmission = () => {
                             <p>IMO, Nigeria</p>
                         </div>
                         <div>
-                            <h3>LOCAL TIME</h3>
-                            <p>18-Aug-2023</p>
-                            <p>11.05.23 am</p>
+                            <h3 className="font-bold">LOCAL TIME</h3>
+                            <p>{ currentDate.toLocaleString() }</p>
                         </div>
                     </div>
                     <div className="flex justify-start items-center bg-[#95baef] text-black-2 border-x-graydark mb-8 p-4 shadow-lg">
@@ -221,7 +249,7 @@ const ElectionReportSubmission = () => {
                     </div>
                     <div className="flex justify-between items-center">
                         <p>You can update form after 5 minutes</p>
-                        <button className="border-1 px-4 py-2 bg-primary rounded-xl text-white font-bold" onClick={e => closeModal()}>Submit</button>
+                        <button className="border-1 px-4 py-2 bg-primary rounded-xl text-white font-bold" onClick={e => {submitVote(); closeModal()} }>Submit</button>
                     </div>
                 </div>
             )
@@ -274,8 +302,9 @@ const ElectionReportSubmission = () => {
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <select
+                                    name="country"
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getStates(e.target.value)); setCountry(e.target.value)}}
+                                    onChange={e => {e.preventDefault(); dispatch(getStates(e.target.value)); setCountry(e.target.value); handleInputChange(e)}}
                                 >
                                     <option>Select country</option>
                                     <option>Nigeria</option>
@@ -287,8 +316,9 @@ const ElectionReportSubmission = () => {
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <select
+                                    name="state"
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getGovernments({country, state: e.target.value})); setState(e.target.value)}}
+                                    onChange={e => {e.preventDefault(); dispatch(getGovernments({country, state: e.target.value})); setState(e.target.value); handleInputChange(e)}}
                                 >
                                     <option>Select a state</option>
                                     {
@@ -308,8 +338,9 @@ const ElectionReportSubmission = () => {
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <select 
+                                    name="government"
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getWards({country, state, government: e.target.value})); setGovernment(e.target.value)}}
+                                    onChange={e => {e.preventDefault(); dispatch(getWards({country, state, government: e.target.value})); setGovernment(e.target.value); handleInputChange(e)}}
                                 >
                                     <option>Select a local government</option>
                                     {
@@ -329,8 +360,9 @@ const ElectionReportSubmission = () => {
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <select 
+                                    name="ward"
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getPolls({country, state, government, ward: e.target.value})); setWard(e.target.value)}}
+                                    onChange={e => {e.preventDefault(); dispatch(getPolls({country, state, government, ward: e.target.value})); setWard(e.target.value); handleInputChange(e)}}
                                 >
                                     <option>Select a political ward</option>
                                     {
@@ -350,8 +382,9 @@ const ElectionReportSubmission = () => {
                             <div className="relative">
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <select 
+                                    name="poll"
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); setPoll(e.target.value)}}
+                                    onChange={e => {e.preventDefault(); setPoll(e.target.value); handleInputChange(e)}}
                                 >
                                     <option>Select a poll</option>
                                     {
@@ -372,19 +405,20 @@ const ElectionReportSubmission = () => {
                                 <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
                                 <button
                                     className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onClick={e => { openModal(); setSubmissionModal(true); }}
+                                    onClick={e => { openModal(); setSubmissionModal(true) }}
                                 >
                                     Vote Submission
                                 </button>
                             </div>
                         </div>
                         <div className="col-span-2">
-                            <button
+                            <input
+                                id="file-upload" 
+                                name="file_upload" 
+                                type="file" 
                                 className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold"
-                                onClick={e => { e.preventDefault(); dispatch(saveVote({ country, state, government, ward, poll, localParties, userId })); }}
-                            >
-                                Upload
-                            </button>
+                                onChange={handleInputChange}
+                            />
                         </div>
                     </div>
                 </div>
