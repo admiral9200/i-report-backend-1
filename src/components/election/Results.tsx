@@ -360,28 +360,28 @@ const Results = () => {
                     <div className="mt-8">
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4">Party A</p>
-                            <div className={`col-span-10 bg-[#1877f2] w-[30%]`}></div>
-                            <p className="col-span-1 py-2 ml-6">10%</p>
+                            <div className={`col-span-10 bg-[#1877f2]  w-[20%] `}></div>
+                            <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center">Party B</p>
                             <div className="col-span-10 bg-[#f3f70f] w-[80%]"></div>
-                            <p className="col-span-1 py-2 ml-6">{localVotePercent[1]}%</p>
+                            <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#6ef703] rounded-md py-2 mr-4 flex justify-center">Party C</p>
                             <div className="col-span-10 bg-[#6ef703] w-[40%]"></div>
-                            <p className="col-span-1 py-2 ml-6">{localVotePercent[2]}%</p>
+                            <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#d24b4b] rounded-md py-2 mr-4 flex justify-center">Party D</p>
                             <div className="col-span-10 bg-[#d24b4b] w-[90%]"></div>
-                            <p className="col-span-1 py-2 ml-6">{localVotePercent[3]}%</p>
+                            <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#c2078e] rounded-md py-2 mr-4 flex justify-center">Party E</p>
-                            <div className="col-span-10 bg-[#c2078e] w-[70%]"></div>
-                            <p className="col-span-1 py-2 ml-6">{localVotePercent[4]}%</p>
+                            <div className="col-span-10 bg-[#c2078e] w-[%]"></div>
+                            <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                     </div>
                     {/* gps */}
@@ -429,7 +429,7 @@ const Results = () => {
                                                         <img src={WorldIcon} alt="Logo" className="w-[20%]" />
                                                     </td>
                                                     <td className="p-4 mx-4 border-1 ">{ localTotalVotes }</td>
-                                                    <td className="p-4 mx-4 border-1 ">{ localVotePercent[index] }%</td>
+                                                    <td className="p-4 mx-4 border-1 ">{ localVotePercent ? localVotePercent[index] : 0 }%</td>
                                                     <td className="p-4 mx-4 border-1 ">{ localVoters }</td>
                                                 </tr>
                                             )
