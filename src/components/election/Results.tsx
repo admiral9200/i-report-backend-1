@@ -361,7 +361,7 @@ const Results = () => {
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4">Party A</p>
                             <div className={`col-span-10 bg-[#1877f2] w-[30%]`}></div>
-                            <p className="col-span-1 py-2 ml-6">{localVotePercent[0]}%</p>
+                            <p className="col-span-1 py-2 ml-6">10%</p>
                         </div>
                         <div className="grid grid-cols-12 w-full mb-4">
                             <p className="col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center">Party B</p>
