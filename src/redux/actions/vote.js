@@ -60,3 +60,18 @@ export const getVotersNumber = createAsyncThunk(
         }
     }
 )
+
+export const getMedia = createAsyncThunk(
+    'vote/getMedia',
+    async (mediaId) => {
+        try {
+            const res = await axios.post("https://i-report-backend-admiral.onrender.com/vote/getMedia", { mediaId });
+            if(res) {
+                console.log("blob: ", res.blob());
+            }
+            return res.blob();
+        } catch (err) {
+            throw err;
+        }
+    }
+)

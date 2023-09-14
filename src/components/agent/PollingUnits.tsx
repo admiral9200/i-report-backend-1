@@ -16,7 +16,7 @@ const PollingUnits = ({unitCount, votersNumber}: PollingUnitProps) => {
         for(let i = 0; i <= Math.floor(votersNumber / unitCount); i++) {
             return (
                 <button 
-                    className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'
+                    className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4'
                     onClick={() => {
                         dispatch(setCurrentRoute('/agent/polling-unit-one'));
                     }}
@@ -36,7 +36,7 @@ const PollingUnits = ({unitCount, votersNumber}: PollingUnitProps) => {
             <p className='py-10 font-bold '>
                 All Polling Unit For Dhaka Region
             </p>
-            <div className='grid grid-cols-12 gap-4 content-start'>
+            <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 content-start'>
                 { returnPollingUnits() }
             </div>
         </div>
