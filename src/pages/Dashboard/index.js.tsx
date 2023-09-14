@@ -26,9 +26,9 @@ const Dashboard = () => {
         <>
           <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-7.5 2xl:gap-7.5">
             <div className="col-span-12 xl:col-span-8">
-              <ImageCards />
+              {/* <ImageCards /> */}
               <PostCreate />
-              <PostList />
+              {/* <PostList /> */}
             </div>
             <RightSidebar />
           </div>
@@ -72,7 +72,7 @@ const Dashboard = () => {
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-          {/* <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} /> */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
           {
             switchComponent(curRoute)

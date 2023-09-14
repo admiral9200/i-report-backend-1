@@ -12,214 +12,104 @@ const PollingUnit = () => {
             <p className='py-10 font-bold '>
                 All Polling Unit For Dhaka Region
             </p>
-            <div className='grid grid-cols-12 gap-4 content-start'>
-                <button 
-                    className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'
+            <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-10 gap-4 content-start">
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
                     onClick={() => {
                         dispatch(setCurrentRoute('/admin/polling-unit-one/'));
                     }}
                 >
-                    <img src={FolderIcon} className='w-[60px]' />
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
+                <button
+                    className="flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4"
+                    onClick={() => {
+                        dispatch(setCurrentRoute('/admin/polling-unit-one/'));
+                    }}
+                >
+                    <img src={FolderIcon} className="w-[60px] min-w-[60px]" />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
-                    </div>
-                </button>
-                <button className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray'>
-                    <img src={FolderIcon} className='w-[60px]' />
-                    <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className="text-[14px]">Polling Unit One</p>
                     </div>
                 </button>
             </div>

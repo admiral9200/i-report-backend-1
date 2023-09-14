@@ -358,35 +358,35 @@ const Results = () => {
                     </div>
                     {/* rate */}
                     <div className="mt-8">
-                        <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4">Party A</p>
-                            <div className={`col-span-10 bg-[#1877f2]  w-[20%] `}></div>
+                        <div className="grid grid-cols-12 w-full mb-4 items-center">
+                            <p className="text-[10px] min-w-[100px] ol-span-1 bg-[#1877f2] flex justify-center rounded-md py-2 mr-4 sm:mr-4">Party A</p>
+                            <div className={`col-span-10 rounded-lg h-[50%] bg-[#1877f2] ml-4 w-[20%] sm:h-[50%] `}></div>
                             <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
-                        <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center">Party B</p>
-                            <div className="col-span-10 bg-[#f3f70f] w-[80%]"></div>
+                        <div className="grid grid-cols-12 w-full mb-4 items-center">
+                            <p className="text-[10px] min-w-[100px] col-span-1 bg-[#f3f70f] rounded-md py-2 mr-4 flex justify-center sm:mr-4">Party B</p>
+                            <div className="col-span-10 rounded-lg h-[50%] bg-[#f3f70f] ml-4 w-[80%] sm:h-[50%]"></div>
                             <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
-                        <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#6ef703] rounded-md py-2 mr-4 flex justify-center">Party C</p>
-                            <div className="col-span-10 bg-[#6ef703] w-[40%]"></div>
+                        <div className="grid grid-cols-12 w-full mb-4 items-center">
+                            <p className="text-[10px] min-w-[100px] col-span-1 bg-[#6ef703] rounded-md py-2 mr-4 flex justify-center sm:mr-4">Party C</p>
+                            <div className="col-span-10 rounded-lg h-[50%] bg-[#6ef703] ml-4 w-[40%] sm:h-[50%]"></div>
                             <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
-                        <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#d24b4b] rounded-md py-2 mr-4 flex justify-center">Party D</p>
-                            <div className="col-span-10 bg-[#d24b4b] w-[90%]"></div>
+                        <div className="grid grid-cols-12 w-full mb-4 items-center">
+                            <p className="text-[10px] min-w-[100px] col-span-1 bg-[#d24b4b] rounded-md py-2 mr-4 flex justify-center sm:mr-4">Party D</p>
+                            <div className="col-span-10 rounded-lg h-[50%] bg-[#d24b4b] ml-4 w-[90%] sm:h-[50%]"></div>
                             <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
-                        <div className="grid grid-cols-12 w-full mb-4">
-                            <p className="col-span-1 bg-[#c2078e] rounded-md py-2 mr-4 flex justify-center">Party E</p>
-                            <div className="col-span-10 bg-[#c2078e] w-[%]"></div>
+                        <div className="grid grid-cols-12 w-full mb-4 items-center">
+                            <p className="text-[10px] min-w-[100px] col-span-1 bg-[#c2078e] rounded-md py-2 mr-4 flex justify-center sm:mr-4">Party E</p>
+                            <div className="col-span-10 rounded-lg h-[50%] bg-[#c2078e] ml-4 w-[20%] sm:h-[50%]"></div>
                             <p className="col-span-1 py-2 ml-6">50%</p>
                         </div>
                     </div>
                     {/* gps */}
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="">
+                    <div className="flex flex-wrap">
+                        <div className="w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2">
                             <div className="uppercase">
                                 <div>
                                     <img src={WorldIcon} className="w-[20px] h-[20px]" />
@@ -398,8 +398,8 @@ const Results = () => {
                                     <img src={AfricaImg} alt="" />
                                 </div>
                                 <div>
-                                    <button 
-                                        className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold"
+                                    <button
+                                        className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold my-6"
                                         onClick={e => setOpenProofForm(true)}
                                     >
                                         Proof of Result
@@ -407,7 +407,7 @@ const Results = () => {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div className="w-full sm:w-full md:w-full lg:w-1/2 xl:w-1/2">
                             <table className="items-center">
                                 <thead>
                                     <tr className="bg-[#b0b4ca]">
@@ -420,7 +420,7 @@ const Results = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        localParties && 
+                                        localParties &&
                                         localParties.map((party: any, index: number) => {
                                             return (
                                                 <tr key={index}>
@@ -428,9 +428,9 @@ const Results = () => {
                                                     <td className="p-4 mx-4 border-1  flex justify-center">
                                                         <img src={WorldIcon} alt="Logo" className="w-[20%]" />
                                                     </td>
-                                                    <td className="p-4 mx-4 border-1 ">{ localTotalVotes }</td>
-                                                    <td className="p-4 mx-4 border-1 ">{ localVotePercent ? localVotePercent[index] : 0 }%</td>
-                                                    <td className="p-4 mx-4 border-1 ">{ localVoters }</td>
+                                                    <td className="p-4 mx-4 border-1 ">{localTotalVotes}</td>
+                                                    <td className="p-4 mx-4 border-1 ">{localVotePercent ? localVotePercent[index] : 0}%</td>
+                                                    <td className="p-4 mx-4 border-1 ">{localVoters}</td>
                                                 </tr>
                                             )
                                         })
@@ -446,7 +446,7 @@ const Results = () => {
 
     return (
         <div className="p-5 text-black-2" style={{ border: '2px solid gray' }}>
-            { switchComponent() }
+            {switchComponent()}
         </div>
     )
 }

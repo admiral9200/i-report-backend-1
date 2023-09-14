@@ -7,9 +7,6 @@ import CircleChart from '../../components/admin/CircleChart.tsx';
 import Task from '../../components/admin/Task.tsx';
 import Header from '../../components/Header.tsx';
 import AdminSidebar from '../../components/admin/AdminSidebar.tsx';
-import Profile from '../Profile.tsx';
-import ElectionReportSubmission from '../../components/election/ElectionReportSubmission.tsx';
-import Results from '../../components/election/Results.tsx';
 import PostManagement from '../../components/admin/PostManagement.tsx';
 
 import UserIcon from '../../images/icon/icon-sun.svg'
@@ -26,7 +23,6 @@ const AdminDashboard = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
     const [curRoute, setCurRoute] = useState<any>(currentRoute);
-    const [postManagement, setPostManagement] = useState<boolean>(false);
 
     const switchComponent = (current: string) => {
         if (current == "/admin/") {
@@ -47,198 +43,9 @@ const AdminDashboard = () => {
                         <h2 className='text-boxdark-2 py-6 text-[24px] px-4 font-bold'>Post Management</h2>
                         <table className="w-full">
                             <tbody className="">
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
+                                <tr className="bg-[#e2e7ed] text-[10px] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf] sm:text-[12px]">
                                     <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px]' />
+                                        <img src={UserImg} className='w-[40px] sm:w-[20px]' />
                                     </td>
                                     <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
                                     <td className="p-4 mx-4 text-center">

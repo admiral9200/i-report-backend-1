@@ -6,8 +6,8 @@ const PostList = () => {
             <div className='p-4'>
                 <h2 className='text-primary font-bold text-[24px]'>Post Management</h2>
             </div>
-            <div className='flex justify-between items-center px-10'>
-                <div className='flex justify-center items-center'>
+            <div className='flex flex-wrap px-10'>
+                <div className='flex items-center w-full md:w-1/2 lg:w-1/2 xl:w-1/2'>
                     <p>
                         Show
                     </p>
@@ -18,14 +18,14 @@ const PostList = () => {
                     </select>
                     <p>entries</p>
                 </div>
-                <div className='flex justify-center items-center'> 
+                <div className='flex items-center w-full md:w-1/2 lg:w-1/2 xl:w-1/2'> 
                     <p className='mr-4'>Search: </p>
                     <input className='px-2 rounded-sm' type="search" />
                 </div>
             </div>
-            <div className='mt-6'>
-                <table className="w-full">
-                    <tbody className="">
+            <div className='mt-6 overflow-x-auto max-w-full'>
+                <table className="table-auto">
+                    <tbody className="w-full ">
                         <tr className="bg-[#e2e7ed] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf]">
                             <td className="p-4 mx-4 text-center">
                                 <img src={UserImg} className='w-[40px]' />

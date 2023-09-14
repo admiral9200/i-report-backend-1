@@ -26,7 +26,7 @@ Modal.setAppElement('#root');
 const ElectionReportSubmission = () => {
     const dispatch = useDispatch();
     const [formData, setFormData] = useState(new FormData());
-    
+
     const [modalIsOpen, setIsOpen] = useState<boolean>(false);
     const [electionState, setElectionState] = useState<string>("switch");
     const [formState, setFormState] = useState<boolean>(false);
@@ -41,7 +41,7 @@ const ElectionReportSubmission = () => {
     const [localUserId, setLocalUserId] = useState<string>("");
 
     const [currentDate, setCurrentDate] = useState<any>(new Date());
-    
+
     const [country, setCountry] = useState<string>("");
     const [state, setState] = useState<string>("");
     const [government, setGovernment] = useState<string>("");
@@ -56,16 +56,16 @@ const ElectionReportSubmission = () => {
 
     const parties = useSelector((state: any) => state.party.parties?.parties);
     const userId = useSelector((state: any) => state.auth.currentUser.id);
-    
+
     useEffect(() => {
         const interval = setInterval(() => {
-          setCurrentDate(new Date());
+            setCurrentDate(new Date());
         }, 1000);
-    
+
         return () => {
-          clearInterval(interval);
+            clearInterval(interval);
         };
-      }, []);
+    }, []);
 
     useEffect(() => {
         setLocalParties(parties);
@@ -96,13 +96,13 @@ const ElectionReportSubmission = () => {
     }, [userId])
 
     const handleInputChange = (e: any) => {
-        if(e.target.name === 'file_upload') {
+        if (e.target.name === 'file_upload') {
             formData.set(e.target.name, e.target.files[0])
         } else {
             formData.set(e.target.name, e.target.value);
         }
-        
-      };
+
+    };
 
 
     const openModal = () => {
@@ -117,12 +117,12 @@ const ElectionReportSubmission = () => {
     const handleChange = (e: any, index: number) => {
         const updatedParties = localParties.map((party: any, i: number) => {
             if (i === index) {
-              return { ...party, value: e.target.value };
+                return { ...party, value: e.target.value };
             }
             return party;
-          });
-          setLocalParties(updatedParties);
-          console.log(localParties)
+        });
+        setLocalParties(updatedParties);
+        console.log(localParties)
     }
 
     const submitVote = () => {
@@ -139,18 +139,18 @@ const ElectionReportSubmission = () => {
                     className="flex flex-col justify-center items-center text-white m-auto h-screen"
                 >
                     <button
-                        className="bg-bodydark2 hover:bg-primary flex justify-center w-[50rem] border-2 px-4 py-6 rounded-full items-center my-6"
+                        className="bg-bodydark2 hover:bg-primary flex justify-center w-1/2 border-2 px-4 py-6 rounded-full items-center my-6 md:w-1/2 sm:w-1/2"
                     >
                         <p>Presidential</p>
                     </button>
                     <button
-                        className="bg-bodydark2 hover:bg-primary flex justify-center w-[50rem] border-2 px-4 py-6 rounded-full items-center my-6"
+                        className="bg-bodydark2 hover:bg-primary flex justify-center w-1/2 border-2 px-4 py-6 rounded-full items-center my-6 md:w-1/2 sm:w-1/2"
                         onClick={e => { e.preventDefault(); setElectionState("category") }}
                     >
                         <p>GovernmentShip</p>
                     </button>
                     <button
-                        className="bg-bodydark2 hover:bg-primary flex justify-center w-[50rem] border-2 px-4 py-6 rounded-full items-center my-6"
+                        className="bg-bodydark2 hover:bg-primary flex justify-center w-1/2 border-2 px-4 py-6 rounded-full items-center my-6 md:w-1/2 sm:w-1/2"
                     >
                         <p>Local Government</p>
                     </button>
@@ -166,7 +166,7 @@ const ElectionReportSubmission = () => {
                         </div>
                         <div>
                             <h3 className="font-bold">LOCAL TIME</h3>
-                            <p>{ currentDate.toLocaleString() }</p>
+                            <p>{currentDate.toLocaleString()}</p>
                         </div>
                     </div>
                     <div className="flex justify-start items-center bg-[#95baef] text-black-2 border-x-graydark mb-8 p-4 shadow-lg">
@@ -175,7 +175,7 @@ const ElectionReportSubmission = () => {
                         </p>
                     </div>
                     <div>
-                        <div className="flex text-black-2">
+                        <div className="flex flex-col text-black-2 xl:flex-row lg:flex-row md:flex-row sm:flex-col">
                             <button className="bg-[#cdd1e6] flex justify-evenly border-[1px] border-graydark p-4 w-full hover:cursor-pointer hover:bg-primary">
                                 <img src="" alt="" />
                                 <p>Add Media</p>
@@ -227,14 +227,14 @@ const ElectionReportSubmission = () => {
                                         return (
                                             <tr key={party._id}>
                                                 <td className="p-4 mx-4">
-                                                    { party.name }
+                                                    {party.name}
                                                 </td>
                                                 <td className="p-4 mx-4">
                                                     <img src={WordIcon} className="w-[20px] h-[20px]" alt="" />
                                                 </td>
                                                 <td className="p-4 mx-4">
-                                                    <input 
-                                                        type="number" 
+                                                    <input
+                                                        type="number"
                                                         className="px-2 text-[12px]"
                                                         value={party.value || ''}
                                                         onChange={e => handleChange(e, index)}
@@ -249,7 +249,7 @@ const ElectionReportSubmission = () => {
                     </div>
                     <div className="flex justify-between items-center">
                         <p>You can update form after 5 minutes</p>
-                        <button className="border-1 px-4 py-2 bg-primary rounded-xl text-white font-bold" onClick={e => {submitVote(); closeModal()} }>Submit</button>
+                        <button className="border-1 px-4 py-2 bg-primary rounded-xl text-white font-bold" onClick={e => { submitVote(); closeModal() }}>Submit</button>
                     </div>
                 </div>
             )
@@ -295,131 +295,129 @@ const ElectionReportSubmission = () => {
     const renderElectionForm = () => {
         if (formState) {
             return (
-                <div>
-                    <div className="grid grid-cols-2 grid-rows-3 gap-4">
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">Country</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select
-                                    name="country"
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getStates(e.target.value)); setCountry(e.target.value); handleInputChange(e)}}
-                                >
-                                    <option>Select country</option>
-                                    <option>Nigeria</option>
-                                </select>
-                            </div>
+                <div className="flex flex-wrap">
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">Country</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <select
+                                name="country"
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onChange={e => { e.preventDefault(); dispatch(getStates(e.target.value)); setCountry(e.target.value); handleInputChange(e) }}
+                            >
+                                <option>Select country</option>
+                                <option>Nigeria</option>
+                            </select>
                         </div>
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">State</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select
-                                    name="state"
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getGovernments({country, state: e.target.value})); setState(e.target.value); handleInputChange(e)}}
-                                >
-                                    <option>Select a state</option>
-                                    {
-                                        localStates && localStates.map((state: string) => {
-                                            return (
-                                                <option key={state}>
-                                                    {state}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
+                    </div>
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">State</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <select
+                                name="state"
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onChange={e => { e.preventDefault(); dispatch(getGovernments({ country, state: e.target.value })); setState(e.target.value); handleInputChange(e) }}
+                            >
+                                <option>Select a state</option>
+                                {
+                                    localStates && localStates.map((state: string) => {
+                                        return (
+                                            <option key={state}>
+                                                {state}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">Local Government</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select 
-                                    name="government"
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getWards({country, state, government: e.target.value})); setGovernment(e.target.value); handleInputChange(e)}}
-                                >
-                                    <option>Select a local government</option>
-                                    {
-                                        localGovernments && localGovernments.map((government: string) => {
-                                            return (
-                                                <option key={government}>
-                                                    {government}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
+                    </div>
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">Local Government</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <select
+                                name="government"
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onChange={e => { e.preventDefault(); dispatch(getWards({ country, state, government: e.target.value })); setGovernment(e.target.value); handleInputChange(e) }}
+                            >
+                                <option>Select a local government</option>
+                                {
+                                    localGovernments && localGovernments.map((government: string) => {
+                                        return (
+                                            <option key={government}>
+                                                {government}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">Political Ward</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select 
-                                    name="ward"
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); dispatch(getPolls({country, state, government, ward: e.target.value})); setWard(e.target.value); handleInputChange(e)}}
-                                >
-                                    <option>Select a political ward</option>
-                                    {
-                                        localWards && localWards.map((ward: string) => {
-                                            return (
-                                                <option key={ward}>
-                                                    {ward}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
+                    </div>
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">Political Ward</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <select
+                                name="ward"
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onChange={e => { e.preventDefault(); dispatch(getPolls({ country, state, government, ward: e.target.value })); setWard(e.target.value); handleInputChange(e) }}
+                            >
+                                <option>Select a political ward</option>
+                                {
+                                    localWards && localWards.map((ward: string) => {
+                                        return (
+                                            <option key={ward}>
+                                                {ward}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">Polling</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <select 
-                                    name="poll"
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onChange={e => {e.preventDefault(); setPoll(e.target.value); handleInputChange(e)}}
-                                >
-                                    <option>Select a poll</option>
-                                    {
-                                        localPolls && localPolls.map((poll: string) => {
-                                            return (
-                                                <option key={poll}>
-                                                    {poll}
-                                                </option>
-                                            )
-                                        })
-                                    }
-                                </select>
-                            </div>
+                    </div>
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">Polling</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <select
+                                name="poll"
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onChange={e => { e.preventDefault(); setPoll(e.target.value); handleInputChange(e) }}
+                            >
+                                <option>Select a poll</option>
+                                {
+                                    localPolls && localPolls.map((poll: string) => {
+                                        return (
+                                            <option key={poll}>
+                                                {poll}
+                                            </option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
-                        <div className="">
-                            <p className="my-4 text-[18px] font-bold">Vote Submission</p>
-                            <div className="relative">
-                                <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
-                                <button
-                                    className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
-                                    onClick={e => { openModal(); setSubmissionModal(true) }}
-                                >
-                                    Vote Submission
-                                </button>
-                            </div>
+                    </div>
+                    <div className="w-full sm:w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-4 px-2">
+                        <p className="my-4 text-[18px] font-bold">Vote Submission</p>
+                        <div className="relative">
+                            <img src={WordIcon} className="absolute top-4 left-8 w-[20px] h-[20px]" alt="" />
+                            <button
+                                className="border-1 border-black-2 w-full px-16 py-4 bg-[#e1edfe]"
+                                onClick={e => { openModal(); setSubmissionModal(true) }}
+                            >
+                                Vote Submission
+                            </button>
                         </div>
-                        <div className="col-span-2">
-                            <input
-                                id="file-upload" 
-                                name="file_upload" 
-                                type="file" 
-                                className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold"
-                                onChange={handleInputChange}
-                            />
-                        </div>
+                    </div>
+                    <div className="w-full">
+                        <input
+                            id="file-upload"
+                            name="file_upload"
+                            type="file"
+                            className="border-1 p-4 bg-primary w-full rounded-xl text-white font-bold"
+                            onChange={handleInputChange}
+                        />
                     </div>
                 </div>
             )
