@@ -48,11 +48,11 @@ const Results = () => {
     const switchComponent = () => {
         if (openProofForm) {
             return (
-                <div>
+                <div className="overflow-x-auto max-w-full">
                     <div className="p-4">
                         <h2 className="text-[#1877f2] text-[28px] font-bold">Proof Of Results</h2>
                     </div>
-                    <table className="w-full">
+                    <table className="w-full table-auto">
                         <thead className="items-center">
                             <tr className="bg-[#e2e7ed]">
                                 <th className="p-4 mx-4">Polling Unit</th>
