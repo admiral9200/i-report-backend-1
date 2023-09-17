@@ -13,23 +13,27 @@ const PollingUnits = ({unitCount, votersNumber}: PollingUnitProps) => {
     const dispatch = useDispatch();
 
     const returnPollingUnits = () => {
-        for(let i = 0; i <= Math.floor(votersNumber / unitCount); i++) {
-            return (
-                <button 
+        const buttons = [];
+        for (let i = 0; i < Math.floor(votersNumber / unitCount); i++) {
+            buttons.push(
+                <button
+                    key={i}
                     className='flex flex-col items-center mx-4 hover:shadow-lg hover:bg-gray p-4'
                     onClick={() => {
-                        dispatch(setCurrentRoute('/agent/polling-unit-one'));
+                        dispatch(setCurrentRoute(`/agent/polling-unit-${i+1}@${unitCount}!${i+1}`));
                     }}
                 >
                     <img src={FolderIcon} className='w-[60px]' />
                     <div>
-                        <p className='text-[14px]'>Polling Unit One</p>
+                        <p className='text-[14px]'>
+                            {` Polling Unit ${i + 1} `}
+                        </p>
                     </div>
                 </button>
-            )
+            );
         }
-        
-    }
+        return buttons;
+    };
 
     return (
         <div>

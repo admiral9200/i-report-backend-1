@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import NumberBlock from '../../components/admin/NumberBlock.tsx';
 import BarChart from '../../components/admin/BarChart.tsx';
@@ -17,12 +17,25 @@ import ReportCategory from '../../components/admin/ReportCategory.tsx';
 import VotingReport from '../../components/admin/VotingReport.tsx';
 import PollingUnitOne from '../../components/admin/PollingUnitOne.tsx';
 
+import { getVotesToAdmin } from '../../redux/actions/vote';
 
 const AdminDashboard = () => {
+    const dispatch = useDispatch();
+
     const currentRoute = useSelector((state: any) => state.route.currentRoute);
+    const votesToAdmin = useSelector((state: any) => state.vote.votesToAdmin);
 
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
     const [curRoute, setCurRoute] = useState<any>(currentRoute);
+    const [localVotesToAdmin, setLocalVotesToAdmin] = useState<any>(null);
+
+    useEffect(() => {
+        setLocalVotesToAdmin(votesToAdmin);
+    }, [votesToAdmin])
+
+    useEffect(() => {
+        dispatch(getVotesToAdmin())
+    }, [])
 
     const switchComponent = (current: string) => {
         if (current == "/admin/") {
@@ -39,37 +52,49 @@ const AdminDashboard = () => {
                         <BarChart />
                         <Task />
                     </div>
-                    <div>
+                    <div className='max-w-full'>
                         <h2 className='text-boxdark-2 py-6 text-[24px] px-4 font-bold'>Post Management</h2>
-                        <table className="w-full">
-                            <tbody className="">
-                                <tr className="bg-[#e2e7ed] text-[10px] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf] sm:text-[12px]">
-                                    <td className="p-4 mx-4 text-center">
-                                        <img src={UserImg} className='w-[40px] sm:w-[20px]' />
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">Sadio Mane Farnando</td>
-                                    <td className="p-4 mx-4 text-center">
-                                        1987653489
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        12:45 am, 11/05/2023
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Feed
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Sponsored
-                                        </button>
-                                    </td>
-                                    <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
-                                            Push To Story
-                                        </button>
-                                    </td>
-                                </tr>
+                        <table className="w-full table-auto text-[12px] xl:text-[14px] sm:text-[12px]">
+                            <tbody className="items-center">
+                                {
+                                    localVotesToAdmin &&
+                                    localVotesToAdmin.map((vote: any) => {
+                                        return (
+                                            <tr 
+                                                key={vote._id}
+                                                className="bg-[#e2e7ed] text-[10px] border-t-2 border-[white] text-boxdark-2 hover:bg-[#95b4cf] sm:text-[12px]"
+                                            >
+                                                <td className="p-4 mx-4 text-center">
+                                                    <img src={UserImg} className='w-[40px] sm:w-[20px]' />
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    { vote._id }
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    1987653489
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    12:45 am, 11/05/2023
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
+                                                        Push To Feed
+                                                    </button>
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
+                                                        Push To Sponsored
+                                                    </button>
+                                                </td>
+                                                <td className="p-4 mx-4 text-center">
+                                                    <button className="bg-[#ebebeb] py-2 px-4 rounded-lg hover:bg-graydark hover:text-white">
+                                                        Push To Story
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -89,27 +114,27 @@ const AdminDashboard = () => {
             )
         }
 
-        if(current == "/admin/voting-report") {
+        if (current == "/admin/voting-report") {
             return (
                 <ElectionCategory />
             )
         }
 
-        if(current == "/admin/report-category/") {
+        if (current == "/admin/report-category/") {
             return (
                 <ReportCategory />
             )
         }
 
-        if(current == '/admin/voting-report/') {
+        if (current == '/admin/voting-report/') {
             return (
                 <VotingReport />
             )
         }
 
-        if(current == '/admin/polling-unit-one/') {
+        if (current.includes("/admin/polling-unit-")) {
             return (
-                <PollingUnitOne />
+                <PollingUnitOne agent = {parseInt(current.replace("/admin/polling-unit-", ""))}/>
             )
         }
     }

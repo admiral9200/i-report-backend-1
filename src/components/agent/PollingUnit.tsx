@@ -4,13 +4,10 @@ import ReactPlayer from 'react-player';
 import axios from "axios";
 import Modal from 'react-modal';
 
-
-
 import WorldIcon from "../../images/icon/world-wide-web-svgrepo-com.svg";
 import ViewImg from "../../images/icon/view-hide-svgrepo-com.svg";
 import CloseIcon from "../../images/icon/close-circle-svgrepo-com.svg";
-
-import { getVotes, getMedia } from "../../redux/actions/vote";
+import PushButton from "./PushButton";
 
 const customStyles = {
     content: {
@@ -28,7 +25,12 @@ const customStyles = {
 
 Modal.setAppElement('#root');
 
-const PollingUnit = () => {
+interface PollingUnitProps {
+    agent: number,
+    unitCount: number
+}
+
+const PollingUnit = ({ agent, unitCount }: PollingUnitProps) => {
     const dispatch = useDispatch();
 
     const votes = useSelector((state: any) => state.vote?.votes?.votes);
@@ -41,8 +43,23 @@ const PollingUnit = () => {
     const [videoURL, setVideoURL] = useState('');
 
     useEffect(() => {
-        dispatch(getVotes());
+        const getCurrentVotes = async (agent: number, unitCount: number) => {
+            try {
+                const res = await axios.post('http://localhost:9200/vote/getCurrentVotes', { agent, unitCount });
+                if (res.status == 200) {
+                    setLocalVotes(res.data.data);
+                }
+            } catch (err) {
+                throw err;
+            }
+        }
+
+        getCurrentVotes(agent, unitCount)
     }, [])
+
+    useEffect(() => {
+        displayMedia()
+    }, [videoURL])
 
     useEffect(() => {
         setLocalVotes(votes);
@@ -62,20 +79,31 @@ const PollingUnit = () => {
 
     const fetchVideoData = async (mediaId: string) => {
         try {
-            const response = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getMedia', { mediaId }); 
-            setVideoURL(URL.createObjectURL(new Blob([response.data])));
+          const response = await axios.post('http://localhost:9200/vote/getMedia', { mediaId });
+          const videoBlob = new Blob([response.data], { type: 'video/mp4' });
+          const videoFile = new File([videoBlob], 'video.mp4', { type: 'video/mp4' });
+          setLocalMedia(videoFile);
         } catch (error) {
-            console.error('Error retrieving video data', error);
+          console.error('Error retrieving video data', error);
         }
-    };
+      };
 
-    const displayMedia = () => {
+      const displayMedia = () => {
+        if (!localMedia) {
+          return <div>Loading...</div>; // or display a loading spinner or placeholder
+        }
+      
         return (
-            <div className="w-full sm:w-1/2">
-                <ReactPlayer url={videoURL} controls={true} />
-            </div>
-        )
-    }
+          <video controls autoPlay>
+            <source src={URL.createObjectURL(localMedia)} type="video/mp4" />
+          </video>
+        );
+      };
+
+    useEffect(() => {
+        displayMedia();
+        console.log("url created")
+    }, [videoURL]);
 
     return (
         <div className="overflow-x-auto max-w-full">
@@ -95,7 +123,9 @@ const PollingUnit = () => {
                 </div>
             </Modal>
             <div className="p-4">
-                <h2 className="text-[#1877f2] text-[28px] font-bold">Polling Unit One</h2>
+                <h2 className="text-[#1877f2] text-[28px] font-bold">
+                    {`Polling Unit ${agent}`}
+                </h2>
             </div>
             <table className="w-full table-auto text-[12px] xl:text-[14px] sm:text-[12px]">
                 <thead className="items-center">
@@ -133,9 +163,7 @@ const PollingUnit = () => {
                                         <img src={ViewImg} className="block m-auto w-[20px]" />
                                     </td>
                                     <td className="p-4 mx-4 text-center">
-                                        <button className="bg-[#ebebeb] py-2 px-4 rounded-md hover:bg-graydark hover:text-white">
-                                            Push To Admin
-                                        </button>
+                                        <PushButton id={vote._id} agent={`Polling-Unit-${agent.toString()}`} />
                                     </td>
                                 </tr>
                             )

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMedia, getTotalVotes, getVotePercents, getVotersNumber, getVotes, saveVote } from "../actions/vote";
+import { getMedia, getTotalVotes, getVotePercents, getVotersNumber, getVotes, getVotesToAdmin, saveVote } from "../actions/vote";
 
 export const voteSlice = createSlice({
     name: 'route',
@@ -9,7 +9,8 @@ export const voteSlice = createSlice({
         votePercents: [],
         votersNumber: 0,
         votes: [],
-        media: null
+        media: null,
+        votesToAdmin: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -31,6 +32,11 @@ export const voteSlice = createSlice({
             })
             .addCase(getMedia.fulfilled, (state, action) => {
                 return { ...state, media: action.payload }
+            })
+            .addCase(getVotesToAdmin.fulfilled, (state, action) => {
+                return {
+                    ...state, votesToAdmin: action.payload
+                }
             })
     }
 })

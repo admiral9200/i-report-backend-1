@@ -48,10 +48,10 @@ const AgentDashboard = () => {
             )
         }
 
-        if (current == "/agent/polling-unit-one") {
+        if (current.includes("/agent/polling-unit")) {
             return (
                 <div>
-                    <PollingUnit />
+                    <PollingUnit agent = {parseInt(current.split("!")[1])} unitCount = {parseInt(current.split("@")[1])} />
                 </div>
             )
         }
