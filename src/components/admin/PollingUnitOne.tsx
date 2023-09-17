@@ -43,7 +43,7 @@ const PollingUnitOne = ({ agent }: PollingUnitOneProps) => {
 
     const fetchVideoData = async (mediaId: string) => {
         try {
-            const response = await axios.post('http://localhost:9200/vote/getMedia', { mediaId }); 
+            const response = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getMedia', { mediaId }); 
             setVideoURL(URL.createObjectURL(new Blob([response.data])));
         } catch (error) {
             console.error('Error retrieving video data', error);

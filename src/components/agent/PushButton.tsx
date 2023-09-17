@@ -12,7 +12,7 @@ const PushButton = ({ id, agent }: PushButtonProps) => {
     useEffect(() => {
         const getAdminStatus = async () => {
             try {
-                const res = await axios.post('http://localhost:9200/vote/getAdmin', { id });
+                const res = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getAdmin', { id });
                 if (res.status == 200) {
                     setPushed(true)
                 }
@@ -26,7 +26,7 @@ const PushButton = ({ id, agent }: PushButtonProps) => {
 
     const pushToAdmin = async (id: string) => {
         try {
-            const response = await axios.post('http://localhost:9200/vote/pushToAdmin', { id, agent });
+            const response = await axios.post('https://i-report-backend-admiral.onrender.com/vote/pushToAdmin', { id, agent });
             console.log("agent: ", agent)
             if(response.status == 200) {
                 setPushed(true)

@@ -11,7 +11,7 @@ const PushButton = ({ id }: PushButtonProps) => {
     useEffect(() => {
         const getCheckedStatus = async () => {
             try {
-                const res = await axios.post('http://localhost:9200/vote/getCheckedStatus', { id });
+                const res = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getCheckedStatus', { id });
                 if (res.status == 200) {
                     setChecked(true)
                 }
@@ -24,7 +24,7 @@ const PushButton = ({ id }: PushButtonProps) => {
     }, [])
 
     const setVoteCheck = async (id: string) => {
-        const res = await axios.post('http://localhost:9200/vote/setVoteCheck', { id });
+        const res = await axios.post('https://i-report-backend-admiral.onrender.com/vote/setVoteCheck', { id });
         if(res.status == 200) {
             alert("Successfully Checked!");
             setChecked(true)

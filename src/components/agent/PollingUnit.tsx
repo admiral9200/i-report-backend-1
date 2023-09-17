@@ -45,7 +45,7 @@ const PollingUnit = ({ agent, unitCount }: PollingUnitProps) => {
     useEffect(() => {
         const getCurrentVotes = async (agent: number, unitCount: number) => {
             try {
-                const res = await axios.post('http://localhost:9200/vote/getCurrentVotes', { agent, unitCount });
+                const res = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getCurrentVotes', { agent, unitCount });
                 if (res.status == 200) {
                     setLocalVotes(res.data.data);
                 }
@@ -79,7 +79,7 @@ const PollingUnit = ({ agent, unitCount }: PollingUnitProps) => {
 
     const fetchVideoData = async (mediaId: string) => {
         try {
-          const response = await axios.post('http://localhost:9200/vote/getMedia', { mediaId });
+          const response = await axios.post('https://i-report-backend-admiral.onrender.com/vote/getMedia', { mediaId });
           const videoBlob = new Blob([response.data], { type: 'video/mp4' });
           const videoFile = new File([videoBlob], 'video.mp4', { type: 'video/mp4' });
           setLocalMedia(videoFile);
